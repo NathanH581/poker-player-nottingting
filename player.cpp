@@ -7,7 +7,7 @@ int Player::betRequest(json::Value game_state)
 {
     std::cerr<<json::Serialize(game_state)<<std::endl;
     std::string s = json::Serialize(game_state);
-    std::string delimiter = "{";
+    std::string delimiter = "},{";
     std::string token;
     size_t pos = 0;
     while ((pos = s.find(delimiter)) != std::string::npos) {
