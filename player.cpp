@@ -35,7 +35,7 @@ int Player::betRequest(json::Value game_state)
                 std::cerr<<"we can see cards in our hands!!!!!!!!!!!"<<std::endl;
                 std::cerr<<json::Serialize(hole_cards)<<std::endl;
                 if (player.HasKey("stack")) {
-                    int currentChipCount = player["stack"];
+                    int currentChipCount = player["stack"].ToInt();
                 }
             }
         }
