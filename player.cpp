@@ -7,11 +7,10 @@
 
 using namespace std;
 
-
-			struct Card{
-				std::string suite;
-				std::string rank;
-		};
+struct Card{
+	std::string suite;
+	std::string rank;
+};
 			
 int judge(std::vector<Card> &cards){
 	Card a = cards.front();

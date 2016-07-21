@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "json.h"
+using namespace std;
 
 
 class Player
@@ -13,9 +14,6 @@ class Player
 
         static void showdown(json::Value game_state);
 		
-	private:
-
-	
 };
 
 #endif
