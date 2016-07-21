@@ -1,7 +1,9 @@
 #include "player.h"
 #include "json.h"
 #include <iostream>
-const char* Player::VERSION = "Default C++ folding player";
+#include <cstdlib>
+
+const char* Player::VERSION = "Default C++ player";
 
 int Player::betRequest(json::Value game_state)
 {
@@ -15,7 +17,12 @@ int Player::betRequest(json::Value game_state)
         std::cout << token << std::endl;
         s.erase(0, pos + delimiter.length());
     }
-    return 100;
+    int r = ((double) rand() / (RAND_MAX)) + 1
+    if (r == 1) {
+        return 1000;
+    } else {
+        return 0;
+    }
 
 }
 
