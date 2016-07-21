@@ -38,6 +38,7 @@ int Player::betRequest(json::Value game_state)
         json::Array community_cards = game_state["community_cards"].ToArray();
         std::cerr<<"we can see cards on table!!!!!!!!!!!!!!!!"<<std::endl;
         for(auto it2=community_cards.begin();it2 != community_cards.end(); it2++){
+            std::cerr<<"iteration"<<std::endl;
             json::Value one_card = (*it2);
             std::string card_number = one_card["rank"].ToString();
             std::string card_suite = one_card["suit"].ToString();
