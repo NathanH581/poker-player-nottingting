@@ -15,14 +15,11 @@ int Player::betRequest(json::Value game_state)
     while ((pos = s.find(delimiter)) != std::string::npos) {
         token = s.substr(0,pos);
         std::cout << token << std::endl;
+        std::cout << std::endl;
         s.erase(0, pos + delimiter.length());
     }
-    int r = ((double) rand() / (RAND_MAX)) + 1
-    if (r == 1) {
-        return 1000;
-    } else {
-        return 0;
-    }
+
+    return 100;
 
 }
 
