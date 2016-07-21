@@ -24,10 +24,10 @@ int Player::betRequest(json::Value game_state)
         }
 
 
-        return 1000;
+        return 0;
     } catch(const std::exception& e) {
         // in case it crashes
-        return 1000;
+        return 0;
     }
 }
 
