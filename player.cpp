@@ -80,8 +80,7 @@ int Player::betRequest(json::Value game_state)
             std::string card_suite = one_card["suit"].ToString();
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
-        
-        cards_to_map(community_cards, map_community);
+
 
         if (currentBet == 0) {
             return currentChipCount;
@@ -99,27 +98,3 @@ void Player::showdown(json::Value game_state)
 {
 }
 
-void Player::cards_to_map(json::Array& cards, std::map<std::string,std::vector<string> >& map){
-
-    // get hole cards
-    for ( auto it = cards.begin(); it != cards.end(); it++ ) {
-        string suit = (*it)["suit"].ToString();
-        string rank = (*it)["rank"].ToString();
-        if ( map.find(suit) != map.end() ) {
-            vector<string> vec;
-            vec.push_back(rank);
-            map.insert(make_pair(suit, vec));
-        } else {
-            map[suit].push_back(rank);
-        }
-    }
-    // end get hole cards
-    // print our hole cards
-    std::cerr << "see our cards ======> " << std::endl;
-    for (auto it = map.begin(); it != map.end() ;it++) {
-        std::cerr << "suit: " <<  it->first << std::endl;
-        for ( auto it_vec = it->second.begin(); it_vec != it->second.end(); it_vec++) {
-            cerr << "cards: " << *it_vec;
-        }
-    }// end print our hole cards
-}
