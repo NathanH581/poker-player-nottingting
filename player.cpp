@@ -139,12 +139,14 @@ int Player::betRequest(json::Value game_state)
             int minimum_raise = game_state["minimum_raise"].ToInt();
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
-        
+        int small_blind = 20;
         if ( game_state.HasKey("small_blind") ) { 
-            int small_blind = game_state["small_blind"].ToInt();
+            small_blind = game_state["small_blind"].ToInt();
             std::cerr << "Here is small_blind" << small_blind << std::endl;
         }
-        
+        if (small_blind < 1){
+			small_blind = 20;
+		}
         int current_buy_in = 0;
 		if ( game_state.HasKey("current_buy_in") ) { 
             current_buy_in = game_state["current_buy_in"].ToInt();
@@ -217,7 +219,8 @@ int Player::betRequest(json::Value game_state)
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
 		int val = current_buy_in - our_bet;
-		if (judge(cards)){
+		int ratio = numberOfBigBlinds(small_blind,currentChipCount);
+		if (judge_better(ratio,cards)){
 			std::cerr << "We are positive from judge with " << currentChipCount << std::endl;
 			return currentChipCount;
 		}else{
