@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "json.h"
+using namespace std;
 
 
 class Player
