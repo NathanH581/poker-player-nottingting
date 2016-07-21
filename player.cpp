@@ -18,7 +18,7 @@ int Player::betRequest(json::Value game_state)
             s.erase(0, pos + delimiter.length());
         }
 
-        return 1000
+        return 1000;
     } catch(const std::exception& e) {
         // in case it crashes
         return 1000;
