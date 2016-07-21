@@ -11,7 +11,39 @@ struct Card{
 	std::string suite;
 	std::string rank;
 };
-			
+
+/* 
+    bb = small_blind *2
+    return stackSize/bb;
+*/
+//int numberOfBigBlinds();
+
+/*
+    Final Hand Teirs
+    20 BB or more
+        AA,KK,QQ,JJ,1010
+        AK,AQ,AJ
+    between 5 and 15 BB (inclusive)
+        AA,KK,QQ,JJ,1010
+        AK,AQ,AJ
+        99,88,77,66,55
+        A and anything
+        KQ, KJ, QJ
+        AA,KK,QQ,JJ,1010
+        AK,AQ,AJ
+        99,88,77,66,55
+
+        A and anything
+        KQ, KJ, QJ
+    Less than 5 BB
+                AA,KK,QQ,JJ,1010
+        AK,AQ,AJ
+        99,88,77,66,55
+
+        A and anything
+        K and anything
+        Q and anything
+*/
 int judge(std::vector<Card> &cards){
 	Card a = cards.front();
 	Card b = cards.back();
@@ -54,8 +86,8 @@ int Player::betRequest(json::Value game_state)
             std::cerr << "Here is current_buy_in " << current_buy_in << std::endl;
         }
 		
-        //int currentBet = game_state["current_buy_in"].ToInt();
-        //int potSize = game_state["pot"].ToInt();
+        int currentBet = game_state["current_buy_in"].ToInt();
+        int potSize = game_state["pot"].ToInt();
 		int our_bet = 0;
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
@@ -127,13 +159,13 @@ int Player::betRequest(json::Value game_state)
 			std::cerr << "We are negative from judge" << std::endl;
 			return 0;
 		}
-		/*
+		
         if (currentBet == 0) {
             return currentChipCount;
         } else {
             return 0;
         }
-        */
+        
     } catch(const std::exception& e) {
         // in case it crashes
         return 0;
