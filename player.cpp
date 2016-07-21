@@ -64,7 +64,7 @@ int Player::betRequest(json::Value game_state)
         for(auto it= players.begin();it != players.end(); it++){
             json::Value player = (*it);
 			if ( player.HasKey("bet") ) { 
-				our_bet = game_state["bet"].ToInt();
+				our_bet = player["bet"].ToInt();
 				std::cerr << "Here is bet " << our_bet << std::endl;
 			}
             if (player.HasKey("hole_cards")){
