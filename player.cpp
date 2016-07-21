@@ -22,7 +22,18 @@ int Player::betRequest(json::Value game_state)
             int minimum_raise = game_state["minimum_raise"].ToInt();
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
-
+        
+        std::cerr << "=========================================" << std::endl;
+        json::Array players = game_state["players"].ToArray();
+        
+        for(auto it= players.begin();it != players.end(); it++){
+            json::Value player = (*it);
+            if (player.HasKey("hole_cards")){
+                json::Array hole_cards = player["hole_cards"];
+                std::cerr<<"we can see cards in our hands!!!!!!!!!!!"<<std::endl;
+                std::cerr<<json::Serialize(hole_cards)<<std::endl;
+            }
+        }
 
         return 0;
     } catch(const std::exception& e) {
