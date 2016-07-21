@@ -12,6 +12,8 @@ class Player
         static int betRequest(json::Value game_state);
 
         static void showdown(json::Value game_state);
+        
+        static void cards_to_map(json::Array& cards, std::map<std::string, vector<std::string> >& map);
 		
 	private:
 		class Card{
