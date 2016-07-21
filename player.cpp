@@ -54,8 +54,8 @@ int Player::betRequest(json::Value game_state)
             std::cerr << "Here is current_buy_in " << current_buy_in << std::endl;
         }
 		
-        int currentBet = game_state["current_buy_in"].ToInt();
-        int potSize = game_state["pot"].ToInt();
+        //int currentBet = game_state["current_buy_in"].ToInt();
+        //int potSize = game_state["pot"].ToInt();
 		int our_bet = 0;
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
@@ -127,13 +127,13 @@ int Player::betRequest(json::Value game_state)
 			std::cerr << "We are negative from judge" << std::endl;
 			return 0;
 		}
-		
+		/*
         if (currentBet == 0) {
             return currentChipCount;
         } else {
             return 0;
         }
-        
+        */
     } catch(const std::exception& e) {
         // in case it crashes
         return 0;
