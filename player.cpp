@@ -99,6 +99,11 @@ int numberOfBigBlinds(int bb, int stackSize) {
 int judge(std::vector<Card> &cards){
 	Card a = cards.front();
 	Card b = cards.back();
+		if (b.rank < a.rank){
+		Card c = a;
+		a = b;
+		b = c;
+	}
 	// Pair
 	if (a.rank == b.rank){
 			if (a.rank == "10" || a.rank == "J" || a.rank == "Q" || a.rank == "K" || a.rank == "A"){
@@ -106,8 +111,10 @@ int judge(std::vector<Card> &cards){
 			}
 	}
 	
-	if (a.rank == "A" || b.rank == "A"){
+	if (b.rank == "A"){
+		if (a.rank == "10" || a.rank == "J" || a.rank == "Q" || a.rank == "K"){
 		return 1;
+		}
 	}
 	
 	// If more than 50% of other players are out
