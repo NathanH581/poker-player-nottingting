@@ -43,15 +43,6 @@ int Player::betRequest(json::Value game_state)
 	    //map<string, vector<string> > map_community;
 	
         std::cerr<<json::Serialize(game_state)<<std::endl;
-        std::string s = json::Serialize(game_state);
-        std::string delimiter = "},{";
-        std::string token;
-        size_t pos = 0;
-        while ((pos = s.find(delimiter)) != std::string::npos) {
-            token = s.substr(0,pos);
-            //std::cerr << token << std::endl;
-            s.erase(0, pos + delimiter.length());
-        }
         
         if ( game_state.HasKey("minimum_raise") ) { 
             int minimum_raise = game_state["minimum_raise"].ToInt();
@@ -101,6 +92,7 @@ int Player::betRequest(json::Value game_state)
 	    for ( auto it_vec = it->second.begin(); it_vec != it->second.end(); it_vec++) {
 		 cerr << "cards: " << *it_vec;
 	    }
+	    cerr << std::endl;
 	 }// end print our hole cards
         
         json::Array community_cards = game_state["community_cards"].ToArray();
