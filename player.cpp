@@ -7,7 +7,35 @@
 
 using namespace std;
 
+
+			struct Card{
+				std::string suite;
+				std::string rank;
+		};
+			
+int judge(std::vector<Card> &cards){
+	Card a = cards.front();
+	Card b = cards.back();
+	// Pair
+	if (a.rank == b.rank){
+			if (a.rank == "10" || a.rank == "J" || a.rank == "Q" || a.rank == "K" || a.rank == "A"){
+				return 1;
+			}
+	}
+	
+	if (a.rank == "A" || b.rank == "A"){
+		return 1;
+	}
+	
+	// If more than 50% of other players are out
+	
+	return 0;
+}
+
+
 const char* Player::VERSION = "Default C++ player";
+
+
 
 int Player::betRequest(json::Value game_state)
 {
@@ -36,6 +64,7 @@ int Player::betRequest(json::Value game_state)
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
         int currentChipCount = 0;
+		std::vector<Card> cards;
         for(auto it= players.begin();it != players.end(); it++){
             json::Value player = (*it);
             if (player.HasKey("hole_cards")){
@@ -58,6 +87,10 @@ int Player::betRequest(json::Value game_state)
 		            else {
 			            map_holecards[suit].push_back(rank);
 		            }
+					Card card;
+					card.suite = suit;
+					card.rank = rank;
+					cards.push_back(card);
 		        }
                 // end get hole cards
             }
@@ -80,7 +113,14 @@ int Player::betRequest(json::Value game_state)
             std::string card_suite = one_card["suit"].ToString();
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
-
+		if (judge(cards)){
+			std::cerr << "We are positive from judge" << std::endl;
+			return currentChipCount;
+		}else{
+			std::cerr << "We are negative from judge" << std::endl;
+			return 0;
+		}
+		
         if (currentBet == 0) {
             return currentChipCount;
         } else {
@@ -92,6 +132,7 @@ int Player::betRequest(json::Value game_state)
         return 0;
     }
 }
+
 
 void Player::showdown(json::Value game_state)
 {

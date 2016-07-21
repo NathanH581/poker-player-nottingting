@@ -14,12 +14,8 @@ class Player
         static void showdown(json::Value game_state);
 		
 	private:
-		class Card{
-				std::string suite;
-				std::string rank;
-		};
-		
-		std::vector<Card> m_cards;
+
+	
 };
 
 #endif
