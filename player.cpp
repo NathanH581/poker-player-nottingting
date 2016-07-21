@@ -48,9 +48,9 @@ int Player::betRequest(json::Value game_state)
             int minimum_raise = game_state["minimum_raise"].ToInt();
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
-        
+        int current_buy_in = 0;
 		if ( game_state.HasKey("current_buy_in") ) { 
-            int current_buy_in = game_state["current_buy_in"].ToInt();
+            current_buy_in = game_state["current_buy_in"].ToInt();
             std::cerr << "Here is current_buy_in " << current_buy_in << std::endl;
         }
 		
@@ -116,7 +116,7 @@ int Player::betRequest(json::Value game_state)
 			Card card;
 			card.suite = card_suite;
 			card.rank = card_number;
-			communinty.push_back(card);
+			community.push_back(card);
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
 		int val = current_buy_in - our_bet;
