@@ -1,13 +1,11 @@
 #include "player.h"
 #include "json.h"
 #include <iostream>
-#include <cstdlib>
 
 const char* Player::VERSION = "Default C++ player";
 
 int Player::betRequest(json::Value game_state)
 {
-    
     try {
         std::cerr<<json::Serialize(game_state)<<std::endl;
         std::string s = json::Serialize(game_state);
@@ -20,17 +18,11 @@ int Player::betRequest(json::Value game_state)
             s.erase(0, pos + delimiter.length());
         }
 
-        int r = ((double) rand() / (RAND_MAX)) + 1
-        if (r == 1) {
-            return 1000;
-        } else {
-            return 0;
-        }
+        return 1000
     } catch(const std::exception& e) {
         // in case it crashes
-        return 100;
+        return 1000;
     }
-
 }
 
 void Player::showdown(json::Value game_state)
