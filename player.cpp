@@ -23,15 +23,20 @@ int Player::betRequest(json::Value game_state)
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
         
+        int currentBet = game_state["current_buy_in");
+        int potSize = game_state["pot"];
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
-        
+        int currentChipCount = 0;
         for(auto it= players.begin();it != players.end(); it++){
             json::Value player = (*it);
             if (player.HasKey("hole_cards")){
                 json::Array hole_cards = player["hole_cards"];
                 std::cerr<<"we can see cards in our hands!!!!!!!!!!!"<<std::endl;
                 std::cerr<<json::Serialize(hole_cards)<<std::endl;
+                if (player.HasKey("stack")) {
+                    int currentChipCount = player["stack"];
+                }
             }
         }
         
@@ -45,7 +50,12 @@ int Player::betRequest(json::Value game_state)
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
 
-        return 0;
+        if (currentBet == 0) {
+            return currentChipCount;
+        } else {
+            return 0;
+        }
+        
     } catch(const std::exception& e) {
         // in case it crashes
         return 0;
