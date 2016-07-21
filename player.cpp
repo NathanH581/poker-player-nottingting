@@ -49,14 +49,24 @@ int Player::betRequest(json::Value game_state)
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
         
+		if ( game_state.HasKey("current_buy_in") ) { 
+            int current_buy_in = game_state["current_buy_in"].ToInt();
+            std::cerr << "Here is current_buy_in " << current_buy_in << std::endl;
+        }
+		
         int currentBet = game_state["current_buy_in"].ToInt();
         int potSize = game_state["pot"].ToInt();
+		int our_bet = 0;
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
         int currentChipCount = 0;
 		std::vector<Card> cards;
         for(auto it= players.begin();it != players.end(); it++){
             json::Value player = (*it);
+			if ( player.HasKey("bet") ) { 
+				our_bet = game_state["bet"].ToInt();
+				std::cerr << "Here is bet " << our_bet << std::endl;
+			}
             if (player.HasKey("hole_cards")){
                 json::Array hole_cards = player["hole_cards"];
                 std::cerr<<"we can see cards in our hands!!!!!!!!!!!"<<std::endl;
@@ -97,15 +107,21 @@ int Player::betRequest(json::Value game_state)
         
         json::Array community_cards = game_state["community_cards"].ToArray();
         std::cerr<<"we can see cards on table!!!!!!!!!!!!!!!!"<<std::endl;
+		std::vector<Card> community;
         for(auto it2=community_cards.begin();it2 != community_cards.end(); it2++){
             std::cerr<<"iteration"<<std::endl;
             json::Value one_card = (*it2);
             std::string card_number = one_card["rank"].ToString();
             std::string card_suite = one_card["suit"].ToString();
+			Card card;
+			card.suite = card_suite;
+			card.rank = card_number;
+			communinty.push_back(card);
             std::cerr << card_number << ",,," << card_suite << std::endl;
         }
+		int val = current_buy_in - our_bet;
 		if (judge(cards)){
-			std::cerr << "We are positive from judge" << std::endl;
+			std::cerr << "We are positive from judge with " << currentChipCount << std::endl;
 			return currentChipCount;
 		}else{
 			std::cerr << "We are negative from judge" << std::endl;
