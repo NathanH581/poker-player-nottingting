@@ -17,6 +17,11 @@ int Player::betRequest(json::Value game_state)
             std::cerr << token << std::endl;
             s.erase(0, pos + delimiter.length());
         }
+        
+        if ( json::HasKey("minimum_raise") ) { 
+            int minimum_raise = game_state["minimum_raise"].ToInt();
+            std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
+        }
 
         return 1000;
     } catch(const std::exception& e) {
