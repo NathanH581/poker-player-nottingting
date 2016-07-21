@@ -20,9 +20,12 @@ int Player::betRequest(json::Value game_state)
             s.erase(0, pos + delimiter.length());
         }
 
-        return 100;
-        
-        
+        int r = ((double) rand() / (RAND_MAX)) + 1
+        if (r == 1) {
+            return 1000;
+        } else {
+            return 0;
+        }
     } catch(const std::exception& e) {
         // in case it crashes
         return 100;
