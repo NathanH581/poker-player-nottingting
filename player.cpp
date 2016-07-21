@@ -14,7 +14,7 @@ int Player::betRequest(json::Value game_state)
         size_t pos = 0;
         while ((pos = s.find(delimiter)) != std::string::npos) {
             token = s.substr(0,pos);
-            std::cerr << token << std::endl;
+            //std::cerr << token << std::endl;
             s.erase(0, pos + delimiter.length());
         }
         
