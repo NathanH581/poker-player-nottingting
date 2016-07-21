@@ -12,6 +12,12 @@ class Player
         static int betRequest(json::Value game_state);
 
         static void showdown(json::Value game_state);
+		
+	private:
+		Class Card{
+				std::string suite;
+				std::string rank;
+		};
 };
 
 #endif
