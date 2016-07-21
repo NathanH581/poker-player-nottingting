@@ -139,6 +139,12 @@ int Player::betRequest(json::Value game_state)
             int minimum_raise = game_state["minimum_raise"].ToInt();
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
+        
+        if ( game_state.HasKey("small_blind") ) { 
+            int small_blind = game_state["small_blind"].ToInt();
+            std::cerr << "Here is small_blind" << small_blind << std::endl;
+        }
+        
         int current_buy_in = 0;
 		if ( game_state.HasKey("current_buy_in") ) { 
             current_buy_in = game_state["current_buy_in"].ToInt();
