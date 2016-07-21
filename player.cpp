@@ -23,8 +23,8 @@ int Player::betRequest(json::Value game_state)
             std::cerr << "Here is minimum raise" << minimum_raise << std::endl;
         }
         
-        int currentBet = game_state["current_buy_in");
-        int potSize = game_state["pot"];
+        int currentBet = game_state["current_buy_in").ToInt();
+        int potSize = game_state["pot"].ToInt();
         std::cerr << "=========================================" << std::endl;
         json::Array players = game_state["players"].ToArray();
         int currentChipCount = 0;
