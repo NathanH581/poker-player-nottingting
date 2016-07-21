@@ -48,8 +48,8 @@ int Player::betRequest(json::Value game_state)
                 
                 // get hole cards
                 for ( auto iter_holecards = hole_cards.begin(); iter_holecards != hole_cards.end(); iter_holecards++ ) {
-		            string suit = (*iterator)["suit"].ToString();
-		            string rank = (*iterator)["rank"].ToString();
+		            string suit = (*iter_holecards)["suit"].ToString();
+		            string rank = (*iter_holecards)["rank"].ToString();
 		            if ( map_holecards.find(suit) != map_holecards.end() ) {
 			            vector<string> vec;
 		    	        vec.push_back(rank);
@@ -64,12 +64,12 @@ int Player::betRequest(json::Value game_state)
         }
         // print our hole cards
         std::cerr << "see our cards ======> " << std::endl;
-	    for (auto it = map_holecards.begin(); it != map_holecards.end() ;it++) {
-	        std::cerr << "suit: " <<  it->first << std::endl;
-	        for ( auto it_vec = it->second.begin(); it_vec != it->second.end(); it_vec++) {
-		    cerr << "cards: " << *it_vec;
-	        }
-	    }// end print our hole cards
+	for (auto it = map_holecards.begin(); it != map_holecards.end() ;it++) {
+	    std::cerr << "suit: " <<  it->first << std::endl;
+	    for ( auto it_vec = it->second.begin(); it_vec != it->second.end(); it_vec++) {
+		 cerr << "cards: " << *it_vec;
+	    }
+	 }// end print our hole cards
         
         json::Array community_cards = game_state["community_cards"].ToArray();
         std::cerr<<"we can see cards on table!!!!!!!!!!!!!!!!"<<std::endl;
