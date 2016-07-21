@@ -16,13 +16,6 @@ class Player
         
         static void cards_to_map(json::Array& cards, std::map<std::string, vector<std::string> >& map);
 		
-	private:
-		class Card{
-				std::string suite;
-				std::string rank;
-		};
-		
-		std::vector<Card> m_cards;
 };
 
 #endif
