@@ -16,13 +16,40 @@ struct Card{
     bb = small_blind *2
     return stackSize/bb;
 */
-//int numberOfBigBlinds();
-
+int numberOfBigBlinds(int bb, int stackSize) {
+	return (stackSize/bb);
+}
+	
+	bool judge_better(int &bb,std::vector<Card> &cards){
 /*
     Final Hand Teirs
     20 BB or more
         AA,KK,QQ,JJ,1010
         AK,AQ,AJ
+*/
+	Card a = cards.front();
+	Card b = cards.back();
+	if (a.rank < b.rank){
+		Card c = a;
+		a = b;
+		b = c;
+	}
+	
+	
+	if (a.rank == b.rank){
+		if (b.rank == "J" || b.rank == "Q" || b.rank == "K" || b.rank == "10" || b.rank == "A"){
+			return true;
+		}
+	}
+	
+	if (a.rank == "A"){
+		if (b.rank == "J" || b.rank == "Q" || b.rank == "K"){
+			return true;
+		}
+	}
+	
+	if (bb >= 5){
+		/*
     between 5 and 15 BB (inclusive)
         AA,KK,QQ,JJ,1010
         AK,AQ,AJ
@@ -35,6 +62,26 @@ struct Card{
 
         A and anything
         KQ, KJ, QJ
+		*/
+		if (a.rank == "A" || a.rank == b.rank){
+			return true;
+		}
+		
+		if (a.rank == "K"){
+			if (b.rank == "J" || b.rank == "Q"){
+				return true;
+			}
+		}
+		
+		if (a.rank == "Q" && b.rank == "J"){
+			return true;
+		}
+		
+	}else{
+		if (a.rank == "A" || a.rank == "K" || a.rank == "Q"){
+			return true;
+		}
+		/*
     Less than 5 BB
                 AA,KK,QQ,JJ,1010
         AK,AQ,AJ
@@ -44,6 +91,11 @@ struct Card{
         K and anything
         Q and anything
 */
+
+	}
+		return false;
+	}
+	
 int judge(std::vector<Card> &cards){
 	Card a = cards.front();
 	Card b = cards.back();
