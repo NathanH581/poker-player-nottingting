@@ -99,7 +99,7 @@ int Player::betRequest(json::Value game_state)
 	for (auto it = map_holecards.begin(); it != map_holecards.end() ;it++) {
 	    std::cerr << "suit: " <<  it->first << std::endl;
 	    for ( auto it_vec = it->second.begin(); it_vec != it->second.end(); it_vec++) {
-		 cerr << "cards: " << *it_vec;
+		 cerr << "cards: " << *it_vec << endl;
 	    }
 	 }// end print our hole cards
         
